@@ -8,17 +8,17 @@ class Search extends React.Component {
 		this.findRandomGif = this.findRandomGif.bind(this);
 		this.state = {
 			searchQuery: '',
-		};
+			};
 	}
 
 	handleSubmit(event) {
-	event.preventDefault();
-	console.log(this.state.searchQuery);
-	this.props.startSearch(this.state.searchQuery);
+		event.preventDefault();
+		console.log(this.state.searchQuery);
+		this.props.startSearch(this.state.searchQuery);
 	}
 
 	findRandomGif() {
-	this.props.searchRandom();
+		this.props.searchRandom();
 	}
 
 	render() {
