@@ -32,7 +32,7 @@ class ResultList extends React.Component {
 
 	handleFocusClick(event) {
 		event.preventDefault();
-		let fullScreenGif = {}
+		let fullScreenGif = this.state.fullScreenGif;
 		fullScreenGif.id = event.target.getAttribute('data-gifId');
 		fullScreenGif.src = event.target.getAttribute('data-gifUrl');
 		fullScreenGif.embed = event.target.getAttribute('data-embedUrl');
@@ -40,6 +40,7 @@ class ResultList extends React.Component {
 		this.setState({
 			fullScreenGif: fullScreenGif
 		});
+		this.props.collectFeatureGif(this.state.fullScreenGif);
 	}
 
 	handleClick(event) {
@@ -75,9 +76,7 @@ class ResultList extends React.Component {
 				cuedFavorite: []
 			});
 		}
-
-		
-
+		this.props.collectFavorites(this.state.favoriteGifs);
 	}
 
 	render() {

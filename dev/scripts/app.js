@@ -12,10 +12,14 @@ class App extends React.Component {
 		super(props);
 		this.searchGifs = this.searchGifs.bind(this);
 		this.findRandomGif = this.findRandomGif.bind(this);
+		this.collectFavorites = this.collectFavorites.bind(this);
+		this.collectFeatureGif = this.collectFeatureGif.bind(this);
 		this.state = {
 			searchQuery: '',
 			searchResults: [],
 			randomGif: '',
+			favoriteGifs: [],
+			featureGif: {}
 		};
 	}
 
@@ -61,6 +65,20 @@ class App extends React.Component {
 		});
 	}
 
+	collectFavorites(favoritedGifs) {
+		this.setState({
+			favoriteGifs: favoritedGifs
+		});
+	}
+
+	collectFeatureGif(featureGif) {
+		this.setState({
+			featureGif: featureGif
+		});
+	}
+
+
+
 	render() {
 		return (
 			<div>
@@ -69,7 +87,7 @@ class App extends React.Component {
 					<div className="wrapper mainWrapper">
 						<section className="gifSearch">
 							<Search startSearch={this.searchGifs} searchRandom={this.findRandomGif}/>
-							<ResultList searchResults={this.state.searchResults} randomGif={this.state.randomGif}/>
+							<ResultList searchResults={this.state.searchResults} randomGif={this.state.randomGif} collectFavorites={this.collectFavorites} collectFeatureGif={this.collectFeatureGif}/>
 						</section>
 						<aside>
 							<section className="selectedGif">
