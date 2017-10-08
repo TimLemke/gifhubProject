@@ -24,18 +24,16 @@ import ReactDOM from 'react-dom';
 // 	);
 // };
 
-
-
-
-
 class Gif extends React.Component {
 	constructor(props) {
 		super(props);
+		this.handleSubmit=this.handleSubmit.bind(this);
 		this.handleClick = this.handleClick.bind(this);
 		this.handleFocusClick = this.handleFocusClick.bind(this);
 		this.state = {
 			searchQuery: '',
-			elements: []
+			elements: [],
+			// gifIsLoading: true
 			};
 	}
 
@@ -48,8 +46,21 @@ class Gif extends React.Component {
 				
 	// 		</div>
 
-	handleFocusClick() {
-		console.log('yo!');
+
+	// componentDidMount() {
+	// 	this.setState({
+	// 		gifIsLoading: false
+	// 	})
+	// }
+
+	handleSubmit(event) {
+		event.preventDefault();
+		console.log(this.props.src);
+	}
+
+	handleFocusClick(event) {
+		event.preventDefault();
+		console.log(this.props.src);
 	}
 
 	handleClick(event) {
@@ -58,35 +69,39 @@ class Gif extends React.Component {
 	}
 
 
+
 	render() {
 		return (
 			<div className="gifResult">
-					<img  src={this.props.src} alt=""/>
-				<div onClick={this.handleFocusClick} className="gifResult--Overlay">
-					<div className="gifResult--buttons">
-						<button>
-							<i className="fa fa-thumbs-o-up" aria-hidden="true"></i>
-						</button>
-						<button>
-							<i className="fa fa-thumbs-o-down" aria-hidden="true"></i>
-						</button>
-					</div>
-					<div className="gifResult--rating">
-						<div className="rating">
-							<button onClick={this.handleClick}value={5}>☆
+				<img  src={this.props.src} alt=""/>
+					<form onSubmit={this.handleSubmit} className="gifResult--Overlay">
+						<div className="gifResult--buttons">
+							<button>
+								<i className="fa fa-thumbs-o-up" aria-hidden="true"></i>
 							</button>
-							<button onClick={this.handleClick}value={4}>☆
-							</button>
-							<button onClick={this.handleClick}value={3}>☆
-							</button>
-							<button onClick={this.handleClick}value={2}>☆
-							</button>
-							<button onClick={this.handleClick}value={1}>☆
+							<button>
+								<i className="fa fa-thumbs-o-down" aria-hidden="true"></i>
 							</button>
 						</div>
-					</div>
+						<div className="gifResult--rating">
+							<div className="rating">
+								<button onClick={this.handleClick}value={5}>☆
+								</button>
+								<button onClick={this.handleClick}value={4}>☆
+								</button>
+								<button onClick={this.handleClick}value={3}>☆
+								</button>
+								<button onClick={this.handleClick}value={2}>☆
+								</button>
+								<button onClick={this.handleClick}value={1}>☆
+								</button>
+							</div>
+							<button onClick={this.handleFocusClick} className="fullScreen" type="submit">
+								<i className="fa fa-arrows-alt" aria-hidden="true"></i>
+							</button>
+						</div>
+					</form>
 				</div>
-			</div>
 			)
 		}
 	}

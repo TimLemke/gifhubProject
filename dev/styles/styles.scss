@@ -4,24 +4,138 @@
 
 
 
+.wrapper {
+	max-width: 1180px;
+	margin: 0 auto;
+}
+
+.mainWrapper {
+	display: flex;
+}
 
 
-	.rating {
-		// direction: rtl;
-		float: left;
-		input {
-			display: none;
-		}
+.gifSearch {
+	width: 60%;
+}
 
-		// label {
-		// 	color: white;
-		// }
-		span {
-			font-size: 20px;
-		}
-		
+aside {
+	width: 40%;
+	background-color: blue;
+}
 
+
+
+
+
+
+.gifResultContainer {
+	font-size: 0px;
+	// max-width: 1200px;
+	// margin: 0 auto;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-around;
+
+	// display: flex;
+	// flex-wrap: wrap;
+	// justify-content: space-around;
+	// align-items: center;
+	// line-height: 0;
+	// column-count:         5;
+ //   	column-gap:           0px;
+}
+
+.gifResult {
+	position: relative;
+	// display: inline-block;
+	// flex-grow: 1;
+	// width: 100% !important;
+  // height: auto !important;
+	// padding: 20px;
+	// margin: 5px;
+	// margin-right: 20px;
+	clip-path: inset(2% 2% round 5px 5px);	
+	// clip-path: inset(10px 20px 30px 40px round 10px);
+	width: (25%);
+	img {
+		display: block;
+		margin: 0 auto;
+		// clip-path: inset(10px, 10px, 10px, 10px);	
+		// max-width: 60%;
+		// max-width: 100%;
+		// height: auto;
 	}
+}
+
+// .gifResult {
+// 	// display: flex;
+// 	img {
+// 		max-width: 100%;
+// 	}
+// }
+
+
+.gifResult--buttons {
+	// width: 30%;
+	width: 92%;
+	position: absolute;
+	top: 8px;
+	left: 7px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-direction: row;
+	z-index: 10;
+	button {
+		width: 25px;
+		height: 25px;
+		border-radius: 50%;
+		font-size: 20px;
+		background-color: transparent;
+		border: none;
+		color: white;
+		transition: all 0.3s;
+		&:hover {
+			transform: scale(1.2);
+
+		}
+	}
+}
+
+
+.gifResult--Overlay {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	// height: auto;
+	// width: 100%;
+	opacity: 0;
+	transition: .5s ease;
+	background-color: rgba(0, 0, 0, 0.1);
+
+}
+
+.gifResult--Overlay:hover {
+	opacity: 1;
+}
+
+
+.gifResult--rating {
+	width: 92%;
+	position: absolute;
+	bottom: 5px;
+	left: 10px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-direction: row;
+}
+
+
+
 
 .rating {
   unicode-bidi: bidi-override;
@@ -32,10 +146,12 @@
 .rating > button {
   display: inline-block;
   position: relative;
-  font-size: 20px;
+  font-size: 15px;
+  font-weight: normal;
+  margin-right: 10px;
   color: white;
-  width: 30px;
-  height: 30px;
+  width: 10px;
+  height: 10px;
   background-color: transparent;
   border: none;
 	&:focus {
@@ -76,101 +192,18 @@
 }
 
 
-.ratingForm {
-	label {
-		font-size: 40px;
-	}
-}
 
-
-
-
-
-.gifResultContainer {
-	font-size: 0px;
-	max-width: 1200px;
-	margin: 0 auto;
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-
-	// display: flex;
-	// flex-wrap: wrap;
-	// justify-content: space-around;
-	// align-items: center;
-	// line-height: 0;
-	// column-count:         5;
- //   	column-gap:           0px;
-}
-
-.gifResult {
-	position: relative;
-	display: inline-block;
-	flex-grow: 1;
-	// width: 100% !important;
-  // height: auto !important;
-	// padding: 20px;
-	margin: 20px;
-	img {
-		width: 100%;
-		// max-width: 100%;
-		// height: auto;
-	}
-}
-
-// .gifResult {
-// 	// display: flex;
-// 	img {
-// 		max-width: 100%;
-// 	}
-// }
-
-.gifResult--rating {
-	width: 100%;
-	position: absolute;
-	bottom: 0;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: row;
-}
-
-.gifResult--buttons {
-	// width: 30%;
-	width: 100%;
-	position: absolute;
-	top: 0;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	flex-direction: row;
-	z-index: 10;
-	button {
-		width: 40px;
-		height: 40px;
+.fullScreen {
+	width: 25px;
+		height: 25px;
 		border-radius: 50%;
-		font-size: 30px;
-		background-color: white;
+		font-size: 20px;
+		background-color: transparent;
 		border: none;
-		color: black;
-	}
-}
+		color: white;
+		transition: all 0.3s;
+		&:hover {
+			transform: scale(1.2);
 
-
-.gifResult--Overlay {
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	// height: auto;
-	width: 100%;
-	opacity: 0;
-	transition: .5s ease;
-	background-color: rgba(0, 0, 0, 0.5);
-
-}
-
-.gifResult--Overlay:hover {
-	opacity: 1;
+		}
 }
