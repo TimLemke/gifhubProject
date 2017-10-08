@@ -13,7 +13,6 @@ class Search extends React.Component {
 
 	handleSubmit(event) {
 		event.preventDefault();
-		console.log(this.state.searchQuery);
 		this.props.startSearch(this.state.searchQuery);
 	}
 
