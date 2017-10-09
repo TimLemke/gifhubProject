@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom';
 import Header from './components/Header.js';
 import Search from './components/Search.js';
 import ResultList from './components/ResultList.js';
+import FeaturedGif from './components/FeaturedGif.js';
+import FavoritedGifs from './components/FavoritedGifs.js';
 
 
 
@@ -14,46 +16,26 @@ class App extends React.Component {
 		this.findRandomGif = this.findRandomGif.bind(this);
 		this.collectFavorites = this.collectFavorites.bind(this);
 		this.collectFeatureGif = this.collectFeatureGif.bind(this);
+		this.removeFavorite = this.removeFavorite.bind(this);
+		this.handleExcludedGifs = this.handleExcludedGifs.bind(this);
 		this.state = {
 			searchQuery: '',
 			searchResults: [],
 			randomGif: '',
 			favoriteGifs: [],
-			featureGif: {}
+			featuredGif: {},
+			excludedGifs: []
 		};
 	}
 
 	searchGifs(searchQuery) {
-	fetch(`http://api.giphy.com/v1/gifs/search?q=${searchQuery}&limit=25&api_key=5ec81cbaf1b242b4a9297cbfa8db8cf1`).then(data => data.json())
+	fetch(`http://api.giphy.com/v1/gifs/search?q=${searchQuery}&limit=30&api_key=5ec81cbaf1b242b4a9297cbfa8db8cf1`).then(data => data.json())
 	.then(response => {
 		this.setState({
 			searchResults: response.data,
 			dataIsLoading: false
 			});
 		});
-
-	// let getData = $.ajax({
-	// 	url: `https://api.giphy.com/v1/gifs/search?`,
-	// 		data: {
-	// 		api_key: `5ec81cbaf1b242b4a9297cbfa8db8cf1`,
-	// 		q: `${searchQuery}`,
-	// 		limit: 20
-	// 	}
-	// }) 
-
-	// $.when(getData)
-	// 	.then((data) => {
-	// 		console.log(data.data);
-	// 		let responseData = data.data;
-	// 		let giphyData = [];
-	// 		responseData.map((item, i) => {
-	// 		giphyData.push(item);			
-	// 	})
-	// 		this.setState({
-	// 			searchResults: giphyData,
-	// 			// dataIsLoading: false	
-	// 		});
-	// 	});
 	}
 
 	findRandomGif() {
@@ -71,15 +53,28 @@ class App extends React.Component {
 		});
 	}
 
-	collectFeatureGif(featureGif) {
+	removeFavorite(updatedFavoriteList){
+		console.log(updatedFavoriteList);
+		let newFavoriteList = updatedFavoriteList;
 		this.setState({
-			featureGif: featureGif
+			favoriteGifs: updatedFavoriteList
 		});
 	}
 
+	collectFeatureGif(featureGif) {
+		this.setState({
+			featuredGif: featureGif
+		});
+	}
 
+	handleExcludedGifs(excludedGifs) {
+		this.setState({
+			excludedGifs: excludedGifs
+		});
+	}
 
 	render() {
+		console.log(this.state.searchResults);
 		return (
 			<div>
 				<Header />
@@ -87,20 +82,19 @@ class App extends React.Component {
 					<div className="wrapper mainWrapper">
 						<section className="gifSearch">
 							<Search startSearch={this.searchGifs} searchRandom={this.findRandomGif}/>
-							<ResultList searchResults={this.state.searchResults} randomGif={this.state.randomGif} collectFavorites={this.collectFavorites} collectFeatureGif={this.collectFeatureGif}/>
+							<ResultList searchResults={this.state.searchResults} randomGif={this.state.randomGif} favoritedGifs={this.state.favoriteGifs} excludedGifs={this.state.excludedGifs} collectFavorites={this.collectFavorites} collectFeatureGif={this.collectFeatureGif} handleExcludedGifs={this.handleExcludedGifs}/>
 						</section>
 						<aside>
-							<section className="selectedGif">
-
+							<section className="featuredGifContainer">
+								<FeaturedGif featuredGif={this.state.featuredGif} favoritedGifs={this.state.favoriteGifs} collectFavorites={this.collectFavorites}/>
 							</section>
 							<section className="favoritedGifs">
-
+								<FavoritedGifs favoritedGifs={this.state.favoriteGifs} removeFavorite={this.removeFavorite}/>
 							</section>
 						</aside>				
 					</div>
 				</main>
 			</div>
-
 			)
 		}
 	}

@@ -3,32 +3,46 @@ import ReactDOM from 'react-dom';
 
 import Gif from './Gif';
 
-// const ResultList = (props) => {
-// 	const gifs = props.searchResults.map((searchResults) => {
-// 		return(<Gif key={searchResults.id} src={searchResults.images.fixed_height.url}/>);
-// 	});
-// 	return (
-// 		<div className="gifResultContainer">
-// 			{gifs}
-// 		</div>
-
-// 	)
-// }
 
 class ResultList extends React.Component {
 	constructor(props) {
 		super(props);
+		this.removeGif = this.removeGif.bind(this);
 		this.handleClick = this.handleClick.bind(this);
 		this.handleFocusClick = this.handleFocusClick.bind(this);
 		this.handleFavorite = this.handleFavorite.bind(this);
 		this.state = {
-			searchQuery: '',
-			elements: [],
+			searchResults: [],
 			favoriteGifs: [],
 			cuedFavorite: [],
-			fullScreenGif: {}
+			fullScreenGif: {},
+			excludedGifs: []
 		};
 	}
+
+	componentWillReceiveProps(props) {
+		this.setState({
+			searchResults: props.searchResults,
+			favoriteGifs: props.favoritedGifs,
+			excludedGifs: props.excludedGifs
+		});
+	}
+
+
+	removeGif(index, gifID) {
+		console.log(gifID);
+		let gifList = Array.from(this.state.searchResults);
+		gifList.splice(index, 1);
+		let excludedGifs = Array.from(this.state.excludedGifs);
+		excludedGifs.push(gifID);
+		this.props.handleExcludedGifs(excludedGifs);
+		// this.props.handleExcludedGifs(excludedGifs);
+		this.setState({
+		  searchResults: gifList,
+		  excludedGifs: excludedGifs
+		});
+	}
+
 
 	handleFocusClick(event) {
 		event.preventDefault();
@@ -70,17 +84,36 @@ class ResultList extends React.Component {
 				favoriteGifs: currentFavorites,
 				cuedFavorite: []
 			});
+			this.props.collectFavorites(currentFavorites);
 		} else {
 			this.setState({
 				favoriteGifs: unratedArray,
 				cuedFavorite: []
 			});
+			this.props.collectFavorites(unratedArray);
 		}
-		this.props.collectFavorites(this.state.favoriteGifs);
 	}
 
 	render() {
-		const gifs = this.props.searchResults;
+		let preTrimmedGifs = Array.from(this.state.searchResults);
+		let excludedGifs = Array.from(this.state.excludedGifs);
+		let trimmedGifs = preTrimmedGifs.filter(function(gif) {
+			return !excludedGifs.includes(gif.id)
+		});
+		let gifs = trimmedGifs.slice(0, 23);
+		console.log(gifs);
+
+		// var ages = [12, 19, 30, 45];
+		// var siblings = [{name: 'erika', age: 30}, {name: 'christina', age: 28}, {name: 'angie', age: 20}];
+
+		// siblings.filter(function (sibling) {
+		//   return !ages.includes(sibling.age)
+		  
+		// });
+
+		// console.log(siblings);
+
+
 		return (
 			<div className="gifResultContainer">
 				{gifs.map((gif, index)=> {
@@ -93,7 +126,7 @@ class ResultList extends React.Component {
 										<i onClick={this.handleFavorite} data-gifId={gif.id} data-imgSrc={gif.images.fixed_height.url} className="fa fa-thumbs-o-up" aria-hidden="true"></i>
 									</button>
 									<button>
-										<i className="fa fa-thumbs-o-down" aria-hidden="true"></i>
+										<i onClick={() => this.removeGif(index, gif.id)} data-removegifId={gif.id} className="fa fa-thumbs-o-down" aria-hidden="true"></i>
 									</button>
 								</div>
 								<div className="gifResult--rating">
