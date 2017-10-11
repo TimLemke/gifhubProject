@@ -140,7 +140,7 @@ class App extends React.Component {
 	}
 
 	searchGifs(searchQuery) {
-	fetch(`http://api.giphy.com/v1/gifs/search?q=${searchQuery}&limit=50&api_key=5ec81cbaf1b242b4a9297cbfa8db8cf1`).then(data => data.json())
+	fetch(`https://api.giphy.com/v1/gifs/search?q=${searchQuery}&limit=50&api_key=5ec81cbaf1b242b4a9297cbfa8db8cf1`).then(data => data.json())
 	.then(response => {
 		this.setState({
 			searchResults: response.data,
