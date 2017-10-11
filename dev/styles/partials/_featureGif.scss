@@ -1,0 +1,45 @@
+$roboto: 'Roboto', sans-serif;
+$openSans: 'Open Sans', sans-serif;
+
+
+.featuredGifContainer {
+	padding-top: 25px;
+}
+
+.featuredGif {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	flex-grow: 1;
+	img {
+		width: 500px;
+		height: auto;
+	}
+	i {
+		font-size: 50px;
+		color: black;
+	}
+}
+
+.featuredGif--info {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin-top: 25px;
+	margin-bottom: 25px;
+	a {
+		text-decoration: none;
+		color: black;
+		font-family: $roboto;
+		font-size: 20px;
+		padding: 10px;
+		color: black;
+		&:hover {
+			background-color: black;
+			color: white;
+		}
+
+	}
+}

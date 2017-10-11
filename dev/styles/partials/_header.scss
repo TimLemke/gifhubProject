@@ -1,5 +1,103 @@
 
+$roboto: 'Roboto', sans-serif;
+$openSans: 'Open Sans', sans-serif;
+
+
+header {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	background-color: black;
+	color: white;
+}
 .headerWrapper {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+	@include respond-to('small') {
+		// width: 100%;
+		flex-direction: column;
+	}
+}
+
+.pageHeader--left {
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+	text-align: center;
+	@include respond-to('xlarge') {
+		padding-left: 40px;
+		}
+	@include respond-to('small') {
+		padding-left: 0px;
+		width: 100%;
+	}
+	h2 {
+		font-family: $roboto;
+		letter-spacing: 1px;
+		font-size: 40px;
+		@include respond-to('small') {
+		padding-bottom: 15px;
+		}
+	}
+	p {
+		font-family: $openSans;
+		font-size: 12px;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		@include respond-to('xlarge') {
+		width: 400px;
+		font-size: 15px;
+		text-align: left;
+		margin: 0 auto;
+		}
+		@include respond-to('small') {
+		width: 100%;
+		text-align: center;
+		padding-bottom: 30px;
+		}
+
+	}
+	
+	span {
+		font-size: 20px;
+	}
+	i {
+		font-size: 20px;
+	}
+}
+
+.pageHeader--right {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	@include respond-to('xlarge') {
+		padding-right: 40px;
+	}
+	@include respond-to('small') {
+		padding-right: 0px;
+		width: 100%;
+	}
+
+	
+	button {
+		margin-top: 15px;
+		margin-bottom: 12px;
+		width: 100px;
+		height: 30px;
+		font-family: $roboto;
+		font-size: 20px;
+		letter-spacing: 1px;
+		font-weight: 700;
+		color: black;
+		background-color: white;
+		border: none;
+	}
+}
+
+.userImage {
+	width: 100px;
+	height: auto;
+	border-radius: 50%;
 }

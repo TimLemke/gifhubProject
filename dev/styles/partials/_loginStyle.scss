@@ -1,0 +1,44 @@
+$roboto: 'Roboto', sans-serif;
+$openSans: 'Open Sans', sans-serif;
+
+.logInMain {
+	background-color: black;
+}
+
+.logInWrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+}
+
+.logInContentsContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-family: $roboto;
+	background-color: white;
+	height: 400px;
+	width: 404px;
+	border-radius: 10px;
+	h1 {
+		font-size: 40px;
+	}
+	img {
+		margin-top: 40px;
+		max-width: 100%;
+	}
+	button {
+		margin-top: 40px;
+		margin-bottom: 12px;
+		width: 100px;
+		height: 30px;
+		font-family: $roboto;
+		font-size: 20px;
+		font-weight: 400;
+		color: white;
+		background-color: black;
+		border: none;
+	}
+}

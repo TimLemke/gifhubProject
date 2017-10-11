@@ -1,0 +1,25 @@
+$roboto: 'Roboto', sans-serif;
+$openSans: 'Open Sans', sans-serif;
+
+
+
+
+
+
+footer {
+	background-color: black;
+}
+
+.footerWrapper {
+	height: 80px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: white;
+	font-family: $openSans;
+	font-size: 12px;
+	a {
+		text-decoration: none;
+		color: white;
+	}
+}
